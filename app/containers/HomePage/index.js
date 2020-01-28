@@ -33,7 +33,7 @@ import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
-const key = 'home';
+const key = 'homeee';
 
 export function HomePage({
   username,

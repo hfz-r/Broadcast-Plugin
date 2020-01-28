@@ -1,7 +1,3 @@
-/**
- * The global state selectors
- */
-
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
@@ -33,6 +29,12 @@ const makeSelectRepos = () =>
     globalState => globalState.userData.repositories,
   );
 
+const makeSelectMessages = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.payload.messages,
+  );
+
 const makeSelectLocation = () =>
   createSelector(
     selectRouter,
@@ -45,5 +47,6 @@ export {
   makeSelectLoading,
   makeSelectError,
   makeSelectRepos,
+  makeSelectMessages,
   makeSelectLocation,
 };

@@ -21,7 +21,7 @@ const homeReducer = (state = initialState, action) =>
     switch (action.type) {
       case CHANGE_USERNAME:
         // Delete prefixed '@' from the github username
-        draft.username = action.username.replace(/@/gi, '');
+        draft.username = action.kotey.replace(/@/gi, '');
         break;
     }
   });
