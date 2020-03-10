@@ -13,7 +13,7 @@ module.exports = require('./webpack.base.babel')({
   // In production, we skip all hot-reloading stuff
   entry: [
     require.resolve('react-app-polyfill/ie11'),
-    path.join(process.cwd(), 'app/app.js'),
+    path.join(process.cwd(), 'app/facade.js'),
   ],
 
   // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
@@ -54,12 +54,7 @@ module.exports = require('./webpack.base.babel')({
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name(module) {
-            const packageName = module.context.match(
-              /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
-            )[1];
-            return `npm.${packageName.replace('@', '')}`;
-          },
+          name: 'vendors',
         },
       },
     },
@@ -88,8 +83,8 @@ module.exports = require('./webpack.base.babel')({
     // assets manipulations and do leak its manipulations to HtmlWebpackPlugin
     new OfflinePlugin({
       relativePaths: false,
-      publicPath: '/',
-      appShell: '/',
+      publicPath: process.env.PUBLIC_PATH,
+      appShell: process.env.PUBLIC_PATH,
 
       // No need to cache .htaccess. See http://mxs.is/googmp,
       // this is applied before any match in `caches` section
@@ -116,21 +111,21 @@ module.exports = require('./webpack.base.babel')({
     }),
 
     new WebpackPwaManifest({
-      name: 'React Boilerplate',
-      short_name: 'React BP',
-      description: 'My React Boilerplate-based project!',
+      name: 'Broadcast Sidebar',
+      short_name: 'Broadcast',
+      description: 'Hartalega Broadcast Widget',
       background_color: '#fafafa',
       theme_color: '#b1624d',
       inject: true,
       ios: true,
       icons: [
         {
-          src: path.resolve('app/images/icon-512x512.png'),
-          sizes: [72, 96, 128, 144, 192, 384, 512],
+          src: path.resolve('app/images/icon-512x113.png'),
+          sizes: [72, 96],
         },
         {
-          src: path.resolve('app/images/icon-512x512.png'),
-          sizes: [120, 152, 167, 180],
+          src: path.resolve('app/images/icon-512x113.png'),
+          sizes: [120],
           ios: true,
         },
       ],

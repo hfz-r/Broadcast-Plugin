@@ -1,7 +1,7 @@
 {
   "name": "broadcast-sidebar",
   "version": "1.1.0",
-  "description": "Hartalega Broadcast Plugin",
+  "description": "Hartalega Broadcast Widget",
   "repository": {
     "type": "git",
     "url": "git://github.com/hfz-r/broadcast-sidebar.git"
@@ -145,6 +145,7 @@
     "pre-commit": "1.2.2",
     "prettier": "1.17.0",
     "react-app-polyfill": "0.2.2",
+    "react-bootstrap": "^1.0.0-beta.16",
     "react-test-renderer": "16.8.6",
     "react-testing-library": "6.1.2",
     "rimraf": "2.6.3",

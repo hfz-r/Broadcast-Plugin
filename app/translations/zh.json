@@ -1,0 +1,6 @@
+{
+  "app.components.Sidebar.header": "公告",
+  "app.containers.LocaleToggle.en": "",
+  "app.containers.LocaleToggle.zh": "",
+  "app.containers.NotFoundPage.header": "找不到网页。"
+}

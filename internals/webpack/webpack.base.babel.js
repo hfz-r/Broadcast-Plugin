@@ -6,6 +6,8 @@ const path = require('path');
 const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
 
+const PUBLIC_PATH = process.env.PUBLIC_PATH || '/';
+
 module.exports = options => ({
   mode: options.mode,
   entry: options.entry,
@@ -13,7 +15,11 @@ module.exports = options => ({
     {
       // Compile into js/build.js
       path: path.resolve(process.cwd(), 'build'),
-      publicPath: '/',
+      publicPath: PUBLIC_PATH,
+      // Library build
+      library: 'Widget',
+      libraryExport: 'default',
+      libraryTarget: 'umd',
     },
     options.output,
   ), // Merge with env dependent settings
@@ -114,6 +120,7 @@ module.exports = options => ({
     // drop any unreachable code.
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
+      PUBLIC_PATH: '/',
     }),
     new Dotenv(),
   ]),

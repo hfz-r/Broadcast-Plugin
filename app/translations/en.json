@@ -1,1 +1,6 @@
-[]
+{
+  "app.components.Sidebar.header": "Announcements",
+  "app.containers.LocaleToggle.en": "en",
+  "app.containers.LocaleToggle.zh": "zh",
+  "app.containers.NotFoundPage.header": "Page not found."
+}
