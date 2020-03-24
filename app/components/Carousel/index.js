@@ -22,13 +22,15 @@ const CloseButton = styled.button`
 `;
 
 const CarouselWrapper = props => {
-  const { toggledState, onToggleAlert } = props;
+  const { toggledState, onToggleAlert, position } = props;
 
   return (
     <React.Fragment>
       <Wrapper
         toggle={toggledState}
-        className="alert alert-dismissible text-white pt-2 p-0 m-0 d-lg-none"
+        // className="alert alert-dismissible text-white fixed-bottom pt-2 p-0 m-0 d-md-none"
+        className={`alert alert-dismissible text-white pt-2 p-0 m-0 d-md-none 
+          ${position.y === 'bottom' ? 'fixed-bottom' : 'fixed-top'}`}
       >
         <CloseButton
           className="close"
@@ -41,17 +43,27 @@ const CarouselWrapper = props => {
           <Carousel {...props} />
         </ErrorBoundary>
       </Wrapper>
-      <section className="d-lg-none">
+      <section className="d-md-none">
         <ToggleButton {...props} />
       </section>
     </React.Fragment>
   );
 };
 
+CarouselWrapper.defaultProps = {
+  position: {
+    y: 'top',
+  },
+};
+
 CarouselWrapper.propTypes = {
   loading: PropTypes.bool,
   toggledState: PropTypes.bool,
   onToggleAlert: PropTypes.func,
+  position: PropTypes.shape({
+    x: PropTypes.string,
+    y: PropTypes.string,
+  }),
 };
 
 export default CarouselWrapper;

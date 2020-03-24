@@ -64,7 +64,7 @@ const ToggleButton = props => {
   return (
     <StyledContainer
       open={toggled}
-      position={position}
+      position={position.x}
       onClick={() => onToggle(!toggled)}
     >
       <a>
@@ -78,14 +78,19 @@ const ToggleButton = props => {
 };
 
 ToggleButton.defaultProps = {
-  position: 'right',
+  position: {
+    x: 'right',
+  },
 };
 
 ToggleButton.propTypes = {
-  position: PropTypes.string,
   toggled: PropTypes.bool,
   onToggle: PropTypes.func,
   messages: PropTypes.array,
+  position: PropTypes.shape({
+    x: PropTypes.string,
+    y: PropTypes.string,
+  }),
 };
 
 export default ToggleButton;

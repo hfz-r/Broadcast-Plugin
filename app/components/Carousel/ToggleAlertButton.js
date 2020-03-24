@@ -64,7 +64,7 @@ const ToggleButton = props => {
   return (
     <StyledToggleContainer
       toggle={toggledState}
-      position={position}
+      position={position.x}
       onClick={() => onToggleAlert(!toggledState)}
     >
       <a>
@@ -78,14 +78,19 @@ const ToggleButton = props => {
 };
 
 ToggleButton.defaultProps = {
-  position: 'right',
+  position: {
+    x: 'right',
+  },
 };
 
 ToggleButton.propTypes = {
-  position: PropTypes.string,
   toggledState: PropTypes.bool,
   onToggleAlert: PropTypes.func,
   messages: PropTypes.array,
+  position: PropTypes.shape({
+    x: PropTypes.string,
+    y: PropTypes.string,
+  }),
 };
 
 export default ToggleButton;

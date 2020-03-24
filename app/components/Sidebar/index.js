@@ -35,9 +35,9 @@ const ContentWrapper = styled.div`
 `;
 
 const Sidebar = props => (
-  <Wrapper toggled={props.toggled} position={props.position}>
-    <ContentWrapper toggled={props.toggled} position={props.position}>
-      <div className="d-none d-lg-block">
+  <Wrapper toggled={props.toggled} position={props.position.x}>
+    <ContentWrapper toggled={props.toggled} position={props.position.x}>
+      <div className="d-none d-md-block">
         <ToggleButton {...props} />
         <ContentBody {...props} />
       </div>
@@ -46,12 +46,17 @@ const Sidebar = props => (
 );
 
 Sidebar.defaultProps = {
-  position: 'right',
+  position: {
+    x: 'right',
+  },
 };
 
 Sidebar.propTypes = {
   toggled: PropTypes.bool,
-  position: PropTypes.string,
+  position: PropTypes.shape({
+    x: PropTypes.string,
+    y: PropTypes.string,
+  }),
 };
 
 export default Sidebar;
