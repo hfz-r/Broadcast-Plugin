@@ -8,7 +8,7 @@ import {
 import request from 'utils/request';
 
 export function* getMessages() {
-  const requestURL = `${process.env.API_URL}/api/messages`;
+  const requestURL = `${process.env.API_URL}/messages`;
 
   try {
     const messages = yield call(request, requestURL);

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const HorizontalLine = styled.hr`
   margin: 0 !important;
@@ -47,16 +48,22 @@ const Content = props => {
   return (
     <React.Fragment>
       {props.messages.map(msg => (
-        <div key={msg.id}>
+        <div key={msg.message_id}>
           <ContentTitle className="hover-underline">
-            <a className="text-dark" href="./maintenance-schedule.html#content">
-              <b>{msg.description}</b>
-            </a>
+            <Link
+              className="text-dark"
+              to={`/announcements/${msg.slug}/overview`}
+            >
+              <b>{msg.projectAbout.title}</b>
+            </Link>
           </ContentTitle>
           <ContentBody>
-            <a className="text-dark" href="./maintenance-schedule.html#content">
-              {msg.title}
-            </a>
+            <Link
+              className="text-dark"
+              to={`/announcements/${msg.slug}/overview`}
+            >
+              {msg.projectAbout.description}
+            </Link>
           </ContentBody>
           <HorizontalLine />
         </div>
