@@ -57,7 +57,6 @@ CarouselWrapper.defaultProps = {
 };
 
 CarouselWrapper.propTypes = {
-  loading: PropTypes.bool,
   toggledState: PropTypes.bool,
   onToggleAlert: PropTypes.func,
   position: PropTypes.shape({

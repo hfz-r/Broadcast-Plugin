@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Carousel } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 const ContentWrapper = styled.div`
   width: 100%;
@@ -10,16 +12,26 @@ const ContentWrapper = styled.div`
   text-align: center;
 `;
 
+const routeUrl = process.env.DASHBOARD_URL;
+
 const ControlledCarousel = props => {
-  const { messages, error } = props;
+  const { messages, token } = props;
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(null);
 
-  if (error) throw new Error(`${error}`);
+  if (props.error) throw new Error(props.error);
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
     setDirection(e.direction);
+  };
+
+  const toggleViewWindow = slug => {
+    window.open(
+      `${routeUrl}/views/${token}/${slug}/overview`,
+      '',
+      'width=600,height=400,left=200,top=200',
+    );
   };
 
   return (
@@ -28,12 +40,12 @@ const ControlledCarousel = props => {
         <Carousel.Item key={msg.message_id}>
           <ContentWrapper className="d-block p-5">
             <h5 className="m-0">
-              <Link
+              <a
                 className="text-white"
-                to={`/announcements/${msg.slug}/overview`}
+                onClick={() => toggleViewWindow(msg.slug)}
               >
-                {msg.projectAbout.title}
-              </Link>
+                <b>{msg.projectAbout.title}</b>
+              </a>
             </h5>
             <p className="small">{msg.projectAbout.description}</p>
           </ContentWrapper>
@@ -46,7 +58,8 @@ const ControlledCarousel = props => {
 
 ControlledCarousel.propTypes = {
   messages: PropTypes.array,
-  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  token: PropTypes.string,
+  error: PropTypes.string,
 };
 
 export default ControlledCarousel;

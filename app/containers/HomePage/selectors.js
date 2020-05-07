@@ -15,6 +15,12 @@ const makeSelectMessages = () =>
     homeState => homeState.payload.messages,
   );
 
+const makeSelectToken = () =>
+  createSelector(
+    selectHome,
+    homeState => homeState.payload.token,
+  );
+
 const makeSelectLoading = () =>
   createSelector(
     selectHome,
@@ -31,6 +37,7 @@ export {
   selectHome,
   makeSelectToggle,
   makeSelectMessages,
+  makeSelectToken,
   makeSelectLoading,
   makeSelectError,
 };

@@ -1,33 +1,41 @@
-import {
-  TOGGLE_STATE,
-  LOAD_MESSAGES,
-  LOAD_MESSAGES_SUCCESS,
-  LOAD_MESSAGES_ERROR,
-} from './constants';
+import * as T from './constants';
 
 export function toggleState(toggled) {
   return {
-    type: TOGGLE_STATE,
+    type: T.TOGGLE_STATE,
     toggled,
+  };
+}
+
+export function setToken(token) {
+  return {
+    type: T.SET_TOKEN,
+    payload: { token },
   };
 }
 
 export function loadMessages() {
   return {
-    type: LOAD_MESSAGES,
+    type: T.LOAD_MESSAGES,
+  };
+}
+
+export function loadMessagesLoading() {
+  return {
+    type: T.LOAD_MESSAGES_LOADING,
   };
 }
 
 export function messagesLoaded(messages) {
   return {
-    type: LOAD_MESSAGES_SUCCESS,
-    messages,
+    type: T.LOAD_MESSAGES_SUCCESS,
+    payload: { messages },
   };
 }
 
 export function messageLoadingError(error) {
   return {
-    type: LOAD_MESSAGES_ERROR,
-    error,
+    type: T.LOAD_MESSAGES_ERROR,
+    payload: { error },
   };
 }

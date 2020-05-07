@@ -29,6 +29,14 @@ function checkStatus(response) {
   throw error;
 }
 
+const getHeaders = ({ token }) => {
+  const options = {
+    credentials: 'include',
+  };
+  if (token) options.headers = { Authorization: `Bearer ${token}` };
+  return options;
+};
+
 /**
  * Requests a URL, returning a promise
  *
@@ -37,8 +45,8 @@ function checkStatus(response) {
  *
  * @return {object}           The response data
  */
-export default function request(url, options) {
-  return fetch(url, options)
+export default function request(url, options = {}) {
+  return fetch(url, getHeaders(options))
     .then(checkStatus)
     .then(parseJSON);
 }

@@ -1,37 +1,39 @@
 import produce from 'immer';
-import {
-  TOGGLE_STATE,
-  LOAD_MESSAGES,
-  LOAD_MESSAGES_SUCCESS,
-  LOAD_MESSAGES_ERROR,
-} from './constants';
+import * as T from './constants';
 
 export const initialState = {
   toggled: true,
   payload: {
+    token: '',
     messages: [],
   },
   loading: false,
-  error: false,
+  error: '',
 };
 
 /* eslint-disable default-case, no-param-reassign */
 const homeReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case TOGGLE_STATE:
+      case T.TOGGLE_STATE:
         draft.toggled = action.toggled;
         break;
-      case LOAD_MESSAGES:
-        draft.loading = true;
-        draft.error = false;
+      case T.SET_TOKEN:
+        draft.payload.token = action.payload.token;
         break;
-      case LOAD_MESSAGES_SUCCESS:
-        draft.payload.messages = action.messages.messages;
+      case T.LOAD_MESSAGES_LOADING:
+        draft.payload.messages = [];
+        draft.error = '';
+        draft.loading = true;
+        break;
+      case T.LOAD_MESSAGES_SUCCESS:
+        draft.payload.messages = action.payload.messages;
+        draft.error = '';
         draft.loading = false;
         break;
-      case LOAD_MESSAGES_ERROR:
-        draft.error = action.error;
+      case T.LOAD_MESSAGES_ERROR:
+        draft.payload.messages = [];
+        draft.error = action.payload.error.message;
         draft.loading = false;
         break;
     }

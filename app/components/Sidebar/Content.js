@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 const HorizontalLine = styled.hr`
   margin: 0 !important;
@@ -42,28 +44,32 @@ const ContentBody = styled.p`
   margin-top: -14px !important;
 `;
 
+const routeUrl = process.env.DASHBOARD_URL;
+
 const Content = props => {
-  if (props.error) throw new Error(`${props.error}`);
+  if (props.error) throw new Error(props.error);
+
+  const toggleViewWindow = slug => {
+    window.open(
+      `${routeUrl}/views/${props.token}/${slug}/overview`,
+      '',
+      'width=600,height=400,left=200,top=200',
+    );
+  };
 
   return (
     <React.Fragment>
       {props.messages.map(msg => (
         <div key={msg.message_id}>
           <ContentTitle className="hover-underline">
-            <Link
-              className="text-dark"
-              to={`/announcements/${msg.slug}/overview`}
-            >
+            <a className="text-dark" onClick={() => toggleViewWindow(msg.slug)}>
               <b>{msg.projectAbout.title}</b>
-            </Link>
+            </a>
           </ContentTitle>
           <ContentBody>
-            <Link
-              className="text-dark"
-              to={`/announcements/${msg.slug}/overview`}
-            >
+            <a className="text-dark" onClick={() => toggleViewWindow(msg.slug)}>
               {msg.projectAbout.description}
-            </Link>
+            </a>
           </ContentBody>
           <HorizontalLine />
         </div>
@@ -75,8 +81,9 @@ const Content = props => {
 
 Content.propTypes = {
   messages: PropTypes.array,
-  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  error: PropTypes.string,
   children: PropTypes.node,
+  token: PropTypes.string,
 };
 
 export default Content;

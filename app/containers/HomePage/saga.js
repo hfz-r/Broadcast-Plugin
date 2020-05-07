@@ -1,20 +1,39 @@
+import Cookies from 'js-cookie';
 import { call, put, takeLatest } from 'redux-saga/effects';
+import { path } from 'ramda';
 import { LOAD_MESSAGES } from 'containers/HomePage/constants';
-import {
-  messagesLoaded,
-  messageLoadingError,
-} from 'containers/HomePage/actions';
-
+import * as actions from 'containers/HomePage/actions';
 import request from 'utils/request';
 
-export function* getMessages() {
-  const requestURL = `${process.env.API_URL}/messages`;
+const apiUrl = process.env.API_URL;
 
+export function* handleAuth() {
   try {
-    const messages = yield call(request, requestURL);
-    yield put(messagesLoaded(messages));
-  } catch (error) {
-    yield put(messageLoadingError(error));
+    const guid = Cookies.get('brdcst.xguid');
+    if (!guid) throw new Error('Session not found');
+    const { token } = yield call(request, `${apiUrl}/auth/${guid}`);
+    yield put(actions.setToken(token));
+    return token;
+  } catch (e) {
+    throw e;
+  }
+}
+
+export function* getMessages() {
+  try {
+    yield put(actions.loadMessagesLoading());
+    const token = yield call(handleAuth);
+    const { messages } = yield call(request, `${apiUrl}/messages`, {
+      token,
+    });
+    yield put(actions.messagesLoaded(messages));
+  } catch (e) {
+    const status = path(['response', 'status'], e);
+    if (status === 403) {
+      yield put(actions.messageLoadingError(new Error('Permission denied')));
+    } else {
+      yield put(actions.messageLoadingError(e));
+    }
   }
 }
 

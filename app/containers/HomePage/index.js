@@ -3,21 +3,12 @@ import React, { memo, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-
-import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
-
 import MobilePage from 'containers/MobilePage';
 import Sidebar from 'components/Sidebar';
 import onClickOutside from './onclickoutside';
 import { toggleState, loadMessages } from './actions';
-import {
-  makeSelectToggle,
-  makeSelectMessages,
-  makeSelectLoading,
-  makeSelectError,
-} from './selectors';
-import reducer from './reducer';
+import * as S from './selectors';
 import saga from './saga';
 
 const key = 'home';
@@ -25,7 +16,6 @@ const key = 'home';
 const HomePage = props => {
   const ref = useRef();
 
-  useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
   useEffect(() => {
@@ -45,10 +35,11 @@ const HomePage = props => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  toggled: makeSelectToggle(),
-  messages: makeSelectMessages(),
-  loading: makeSelectLoading(),
-  error: makeSelectError(),
+  toggled: S.makeSelectToggle(),
+  messages: S.makeSelectMessages(),
+  token: S.makeSelectToken(),
+  loading: S.makeSelectLoading(),
+  error: S.makeSelectError(),
 });
 
 const mapDispatchToProps = dispatch => ({
