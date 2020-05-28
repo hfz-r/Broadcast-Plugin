@@ -19,7 +19,7 @@ const HomePage = props => {
   useInjectSaga({ key, saga });
 
   useEffect(() => {
-    props.onLoadMessages();
+    props.onLoadMessages(props.project);
   }, []);
 
   onClickOutside(ref, () => {
@@ -44,7 +44,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
   onToggle: toggle => dispatch(toggleState(toggle)),
-  onLoadMessages: () => dispatch(loadMessages()),
+  onLoadMessages: project => dispatch(loadMessages(project)),
 });
 
 const withConnect = connect(

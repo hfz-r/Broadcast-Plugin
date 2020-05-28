@@ -24,12 +24,15 @@ export default class ErrorBoundary extends React.Component {
     if (this.state.errorInfo) {
       return (
         <Wrapper>
-          <h2>Something went wrong.</h2>
-          <details style={{ whiteSpace: 'pre-wrap' }}>
+          <h4>
+            An error has occured. <br />
+            Please contact IT Admin.
+          </h4>
+          {/* <details style={{ whiteSpace: 'pre-wrap' }}>
             {this.state.error && this.state.error.toString()}
-            {/* <br />
-            {this.state.errorInfo.componentStack} */}
-          </details>
+            <br />
+            {this.state.errorInfo.componentStack}
+          </details> */}
         </Wrapper>
       );
     }

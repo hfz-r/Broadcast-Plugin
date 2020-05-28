@@ -31,7 +31,7 @@ function checkStatus(response) {
 
 const getHeaders = ({ token }) => {
   const options = {
-    credentials: 'include',
+    // credentials: 'include',
   };
   if (token) options.headers = { Authorization: `Bearer ${token}` };
   return options;

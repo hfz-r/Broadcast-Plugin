@@ -14,9 +14,10 @@ export function setToken(token) {
   };
 }
 
-export function loadMessages() {
+export function loadMessages(project) {
   return {
     type: T.LOAD_MESSAGES,
+    payload: { project },
   };
 }
 

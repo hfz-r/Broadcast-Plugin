@@ -49,9 +49,16 @@ const routeUrl = process.env.DASHBOARD_URL;
 const Content = props => {
   if (props.error) throw new Error(props.error);
 
+  // const toggleViewWindow = slug => {
+  //   window.open(
+  //     `${routeUrl}/views/${props.token}/${slug}/overview`,
+  //     '',
+  //     'width=600,height=400,left=200,top=200',
+  //   );
+  // };
   const toggleViewWindow = slug => {
     window.open(
-      `${routeUrl}/views/${props.token}/${slug}/overview`,
+      `${routeUrl}/Message/Details?slug=${slug}`,
       '',
       'width=600,height=400,left=200,top=200',
     );
@@ -83,7 +90,7 @@ Content.propTypes = {
   messages: PropTypes.array,
   error: PropTypes.string,
   children: PropTypes.node,
-  token: PropTypes.string,
+  // token: PropTypes.string,
 };
 
 export default Content;

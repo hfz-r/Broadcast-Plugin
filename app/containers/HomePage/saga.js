@@ -19,13 +19,18 @@ export function* handleAuth() {
   }
 }
 
-export function* getMessages() {
+export function* getMessages(action) {
+  const { project } = action.payload;
   try {
     yield put(actions.loadMessagesLoading());
-    const token = yield call(handleAuth);
-    const { messages } = yield call(request, `${apiUrl}/messages`, {
-      token,
-    });
+    // const token = yield call(handleAuth);
+    // const { messages } = yield call(request, `${apiUrl}/messages`, {
+    //   token,
+    // });
+    const { messages } = yield call(
+      request,
+      `${apiUrl}/messages?tag=${project}`,
+    );
     yield put(actions.messagesLoaded(messages));
   } catch (e) {
     const status = path(['response', 'status'], e);

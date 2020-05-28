@@ -86,9 +86,9 @@ const Title = props => {
         <FormattedMessage {...messages.header} />
       </a>
       <ButtonWrapper>
-        <a href="#">
+        {/* <a href="#">
           <LocaleToggle />
-        </a>
+        </a> */}
         <a href="#" onClick={() => onToggle(!toggled)}>
           <i className="fas fa-times" />
         </a>
