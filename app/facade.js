@@ -4,7 +4,7 @@ import App from './app';
 export default class Widget {
   static el;
 
-  static mount({ parentElement = null, ...props } = {}) {
+  static mount({ parentElement = null, ...options } = {}) {
     function doRender() {
       if (Widget.el) {
         throw new Error('Widget is already mounted, unmount first');
@@ -17,7 +17,7 @@ export default class Widget {
         document.body.appendChild(el);
       }
       // create global element
-      ReactDOM.render(App({ ...props }), el);
+      ReactDOM.render(App({ ...options }), el);
       Widget.el = el;
     }
     if (document.readyState === 'complete') {

@@ -3,6 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Badge } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell } from '@fortawesome/free-regular-svg-icons';
 import { swing } from './keyframes';
 
 const StyledBadge = styled(Badge)`
@@ -50,11 +52,15 @@ const StyledContainer = styled(ToggleContainer)`
       text-decoration: none;
       position: relative;
     }
+  }
+`;
 
-    a:hover > i::before {
-      display: inline-block;
-      animation: ${swing} ease-in-out 0.5s 1 alternate;
-    }
+const StyledIcon = styled(({ className }) => (
+  <FontAwesomeIcon className={className} icon={faBell} size="lg" />
+))`
+  ${StyledContainer}:hover & {
+    display: inline-block;
+    animation: ${swing} ease-in-out 0.5s 1 alternate;
   }
 `;
 
@@ -68,7 +74,7 @@ const ToggleButton = props => {
       onClick={() => onToggle(!toggled)}
     >
       <a>
-        <i className="far fa-bell fa-lg" />
+        <StyledIcon />
         <StyledBadge pill variant="warning">
           {messages.length}
         </StyledBadge>

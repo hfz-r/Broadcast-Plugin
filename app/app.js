@@ -4,6 +4,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
+import './assets/base.scss';
 import 'sanitize.css/sanitize.css';
 
 import App from 'containers/App';
@@ -11,7 +12,7 @@ import App from 'containers/App';
 import LanguageProvider from 'containers/LanguageProvider';
 
 /* eslint-disable import/no-unresolved, import/extensions */
-import '!file-loader?name=[name].[ext]!./images/favicon.ico';
+import '!file-loader?name=[name].[ext]!./assets/images/favicon.ico';
 import 'file-loader?name=.htaccess!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
 
@@ -36,6 +37,7 @@ const render = (messages, { ...props } = {}) => (
 
 if (module.hot) {
   module.hot.accept(['./i18n', 'containers/App'], () => {
+    // todo
     window.Widget.unmount();
     render(translationMessages);
   });

@@ -6,32 +6,42 @@ import { createStructuredSelector } from 'reselect';
 import { useInjectSaga } from 'utils/injectSaga';
 import MobilePage from 'containers/MobilePage';
 import Sidebar from 'components/Sidebar';
+import Widget from 'containers/Widget/template';
 import onClickOutside from './onclickoutside';
 import { toggleState, loadMessages } from './actions';
 import * as S from './selectors';
 import saga from './saga';
 
-const key = 'home';
-
 const HomePage = props => {
+  const { onLoadMessages, version, ...rest } = props;
+
   const ref = useRef();
 
-  useInjectSaga({ key, saga });
+  const renderSwitch = param => {
+    switch (param) {
+      case 'v2':
+        return <Widget {...rest} />;
+      default:
+        return (
+          <React.Fragment>
+            <MobilePage {...props} />
+            <Sidebar {...props} />
+          </React.Fragment>
+        );
+    }
+  };
+
+  useInjectSaga({ key: 'home', saga });
 
   useEffect(() => {
-    props.onLoadMessages(props.project);
+    onLoadMessages(props.project);
   }, []);
 
   onClickOutside(ref, () => {
     if (props.toggled) props.onToggle(false);
   });
 
-  return (
-    <div ref={ref}>
-      <MobilePage {...props} />
-      <Sidebar {...props} />
-    </div>
-  );
+  return <div ref={ref}>{renderSwitch(version)}</div>;
 };
 
 const mapStateToProps = createStructuredSelector({

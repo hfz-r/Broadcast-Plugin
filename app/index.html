@@ -4,19 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="mobile-web-app-capable" content="yes" />
-
     <link rel="icon" href="/favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
-    />
     <title>Broadcast - Sidebar Plugin</title>
   </head>
-
   <body>
     <noscript>
       If you're seeing this message, that means
@@ -25,8 +15,11 @@
     </noscript>
   </body>
   <script>
-    Widget.mount({
+    var options = {
       project: 'GRP',
-    });
+      version: 'v2',
+      position: { x: 'left', y: 'bottom' },
+    };
+    Widget.mount(options);
   </script>
 </html>

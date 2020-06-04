@@ -40,7 +40,7 @@ const GlobalStyle = createGlobalStyle`
     background: transparent;
   }
   
-  .fa-bell { color: #dc143c; }
+  // .fa-bell { color: #dc143c; }
 `;
 
 export default GlobalStyle;

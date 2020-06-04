@@ -120,11 +120,11 @@ module.exports = require('./webpack.base.babel')({
       ios: true,
       icons: [
         {
-          src: path.resolve('app/images/icon-512x113.png'),
+          src: path.resolve('app/assets/images/icon-512x113.png'),
           sizes: [72, 96],
         },
         {
-          src: path.resolve('app/images/icon-512x113.png'),
+          src: path.resolve('app/assets/images/icon-512x113.png'),
           sizes: [120],
           ios: true,
         },

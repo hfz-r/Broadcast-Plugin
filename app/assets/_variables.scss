@@ -1,0 +1,10 @@
+// LAYOUT
+$layout-spacer-x: 1.3rem;
+
+// BOOTSTRAP OVERWRITES
+$font-size-xs: ($font-size-base / 1.1);
+
+$box-shadow-default: 0 0.46875rem 2.1875rem rgba(darken($primary, 50%), 0.03),
+  0 0.9375rem 1.40625rem rgba(darken($primary, 50%), 0.03),
+  0 0.25rem 0.53125rem rgba(darken($primary, 50%), 0.05),
+  0 0.125rem 0.1875rem rgba(darken($primary, 50%), 0.03);
