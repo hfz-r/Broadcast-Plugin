@@ -2,7 +2,7 @@ import produce from 'immer';
 import * as T from './constants';
 
 export const initialState = {
-  toggled: false,
+  toggled: true,
   payload: {
     token: '',
     messages: [],

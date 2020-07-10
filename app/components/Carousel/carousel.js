@@ -26,9 +26,17 @@ const ControlledCarousel = props => {
     setDirection(e.direction);
   };
 
+  // const toggleViewWindow = slug => {
+  //   window.open(
+  //     `${routeUrl}/views/${token}/${slug}/overview`,
+  //     '',
+  //     'width=600,height=400,left=200,top=200',
+  //   );
+  // };
+
   const toggleViewWindow = slug => {
     window.open(
-      `${routeUrl}/views/${token}/${slug}/overview`,
+      `${routeUrl}/Message/Details?slug=${slug}`,
       '',
       'width=600,height=400,left=200,top=200',
     );
