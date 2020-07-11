@@ -1,7 +1,8 @@
 trigger:
 - master
 
-pool: 'MyAgent'
+pool:
+  vmImage: 'ubuntu-latest'
 
 steps:
 - task: NodeTool@0
@@ -16,13 +17,10 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    Contents: 'build/*'
+    Contents: 'build/**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
-  displayName: 'Copy files to artifacts staging directory'
 
 - task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
-  displayName: 'Publish artifacts'
+  inputs: 
+    pathtoPublish: $(Build.ArtifactStagingDirectory)
+    ArtifactName: 'www'
