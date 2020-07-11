@@ -18,8 +18,10 @@ steps:
   inputs:
     Contents: 'build/**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'Copy files to artifacts staging directory'
 
 - task: PublishBuildArtifacts@1
   inputs: 
     pathtoPublish: $(Build.ArtifactStagingDirectory)
-    ArtifactName: 'www'
+    ArtifactName: 'drop'
+  displayName: 'Publish artifacts'
