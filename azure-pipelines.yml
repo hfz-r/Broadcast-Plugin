@@ -9,18 +9,6 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- task: DownloadSecureFile@1
-  name: envFile
-  displayName: 'Download env file'
-  inputs:
-    secureFile: '.env'
-
-- task: CopyFiles@2
-  inputs:
-    Contents: '$(envFile.secureFilePath)/**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-  displayName: 'Copy env file to artifacts staging directory'
-
 - script: npm install
   displayName: 'npm install'
 
