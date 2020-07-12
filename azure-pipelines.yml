@@ -12,7 +12,7 @@ steps:
 - script: npm install
   displayName: 'npm install'
 
-- script: npm run build
+- script: ($env:PUBLIC_PATH = $(PUBLIC_PATH)) -and (npm run build)
   displayName: 'npm run build'
 
 - task: CopyFiles@2
