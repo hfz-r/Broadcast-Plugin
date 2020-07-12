@@ -15,7 +15,7 @@ steps:
   inputs:
     secureFile: '.env'
 
-- script: cp $(envFile.secureFilePath) $(Build.ArtifactStagingDirectory)
+- script: copy $(envFile.secureFilePath) $(Build.ArtifactStagingDirectory)
   displayName: 'Copy env file to artifacts staging directory'
 
 - script: npm install
