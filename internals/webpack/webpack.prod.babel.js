@@ -7,6 +7,8 @@ const { HashedModuleIdsPlugin } = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
+const PUBLIC_PATH = process.env.PUBLIC_PATH || '/';
+
 module.exports = require('./webpack.base.babel')({
   mode: 'production',
 
@@ -88,8 +90,8 @@ module.exports = require('./webpack.base.babel')({
     // assets manipulations and do leak its manipulations to HtmlWebpackPlugin
     new OfflinePlugin({
       relativePaths: false,
-      publicPath: '/',
-      appShell: '/',
+      publicPath: PUBLIC_PATH,
+      appShell: PUBLIC_PATH,
 
       // No need to cache .htaccess. See http://mxs.is/googmp,
       // this is applied before any match in `caches` section
