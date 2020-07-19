@@ -12,6 +12,9 @@ steps:
   - script: npm install
     displayName: 'Install dependencies'
 
+  - script: npm run lib:pack
+    displayName: 'Build package'
+
   - script: npm pack
     displayName: 'Pack package'
 
